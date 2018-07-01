@@ -1,0 +1,33 @@
+---
+namespace: App\RegisteringLeagues
+
+types:
+    registrationId:
+        type: EventSauce\EventSourcing\UuidAggregateRootId
+        serializer: >
+            {param}->toString()
+        deserializer: >
+            \EventSauce\EventSourcing\UuidAggregateRootId::fromString({param})
+
+commands:
+    StartLeagueRegistration:
+        fields:
+            registrationId: registrationId
+    SpecifyName:
+        fields:
+            registrationId: registrationId
+            name: string
+    ConfirmLeagueRegistration:
+        fields:
+            registrationId: registrationId
+events:
+    LeagueRegistrationHasStarted:
+        fields: []
+    NameWasSpecified:
+        fields:
+            name: string
+    LeagueRegistrationCompleted:
+        fields:
+            name: string
+            email: string
+            passwordHash: string

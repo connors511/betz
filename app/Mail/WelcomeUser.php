@@ -34,7 +34,7 @@ class WelcomeUser extends Mailable
      */
     public function build()
     {
-        return $this->view('register.welcome', ['name' => $this->name])
-            ->to($this->email);
+        return $this->view('mails.register.email', ['name' => $this->name])
+                    ->to($this->email);
     }
 }

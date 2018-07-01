@@ -1,0 +1,33 @@
+---
+namespace: App\RegisteringMatches
+
+types:
+    registrationId:
+        type: EventSauce\EventSourcing\UuidAggregateRootId
+        serializer: >
+            {param}->toString()
+        deserializer: >
+            \EventSauce\EventSourcing\UuidAggregateRootId::fromString({param})
+
+commands:
+    StartMatchRegistration:
+        fields:
+            registrationId: registrationId
+    SpecifyName:
+        fields:
+            registrationId: registrationId
+            name: string
+    ConfirmMatchRegistration:
+        fields:
+            registrationId: registrationId
+events:
+    MatchRegistrationHasStarted:
+        fields: []
+    NameWasSpecified:
+        fields:
+            name: string
+    MatchRegistrationCompleted:
+        fields:
+            name: string
+            email: string
+            passwordHash: string

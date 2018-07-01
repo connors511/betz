@@ -1,0 +1,33 @@
+---
+namespace: App\RegisteringRounds
+
+types:
+    registrationId:
+        type: EventSauce\EventSourcing\UuidAggregateRootId
+        serializer: >
+            {param}->toString()
+        deserializer: >
+            \EventSauce\EventSourcing\UuidAggregateRootId::fromString({param})
+
+commands:
+    StartRoundRegistration:
+        fields:
+            registrationId: registrationId
+    SpecifyName:
+        fields:
+            registrationId: registrationId
+            name: string
+    ConfirmRoundRegistration:
+        fields:
+            registrationId: registrationId
+events:
+    RoundRegistrationHasStarted:
+        fields: []
+    NameWasSpecified:
+        fields:
+            name: string
+    RoundRegistrationCompleted:
+        fields:
+            name: string
+            email: string
+            passwordHash: string
